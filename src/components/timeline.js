@@ -8,8 +8,8 @@ function Timeline() {
   // get the logged in user's photos (hook)
   const { photos } = usePhotos();
   // on loading the photos, we need to use react skeleton
-  // if we have photos, render them (creat a post componet)
-  // if the user has no photos, tell them to create some photos
+  // if we have photos, render them (creat a post component)
+  // if the user has no photos, tell them to follow some people
   return (
     <div className="container col-span-2">
       {/* load skeleton when the photos hasn't loaded yet */}
