@@ -1,0 +1,41 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Route, Redirect } from 'react-router-dom';
+import * as ROUTES from '../constants/routes';
+
+function ProtectedRoute({ user, children, ...rest }) {
+  console.log('user in protected route', user);
+  console.log('children in protected route', children);
+  console.log('rest in protected route', rest);
+
+  return (
+    <Route
+      {...rest}
+      render={({ location }) => {
+        if (user) {
+          return children;
+        }
+
+        if (!user) {
+          return (
+            <Redirect
+              to={{
+                pathname: ROUTES.LOGIN,
+                state: { from: location },
+              }}
+            />
+          );
+        }
+
+        return null;
+      }}
+    />
+  );
+}
+
+export default ProtectedRoute;
+
+ProtectedRoute.propTypes = {
+  user: PropTypes.object,
+  children: PropTypes.object.isRequired,
+};
